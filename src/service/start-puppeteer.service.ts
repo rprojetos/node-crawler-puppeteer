@@ -4,7 +4,7 @@ import puppeteer, { Page } from "puppeteer";
 class StartPuppeteeerSevice{
     constructor(){}
 
-    public start (url: string): Promise<Page | string> {
+    public start (url: string): Promise<Page> {
         return new Promise(async (resolve, reject) => {
             const browser = await puppeteer.launch({ headless: false });
             const page = await browser.newPage();
