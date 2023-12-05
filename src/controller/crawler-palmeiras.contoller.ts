@@ -21,6 +21,11 @@ export class CrawlerPalmeirasController {
             // $ pega somente um seletor (base do jquery)
             // $$ trabalha com array de seletores (base do jquery)
             const nodes = await page.$$(selector);
+            // definindo o tipo dos itens do payload
+            type PayloadItens = string | null | undefined;
+            // para receber as informações extraidas, é definido aqui um array 
+            // de objetos, com os respectivos tipos a serem extraidos da página.
+            const payload: Array<{link: PayloadItens, titulo: PayloadItens, data: PayloadItens}> = [];
             // iterando sob o array de objetos nodes
             for(const node of nodes){
                 // Link, Titulo, Data
@@ -34,7 +39,7 @@ export class CrawlerPalmeirasController {
                 // o elemento que queremos tratar el: Element
                 // a patir no node(nó) el(Element) receberá o elemento presento
                 // nesse nó. 
-                const link = await page.evaluate((el: Element) => {
+                const valLink = await page.evaluate((el: Element) => {
                     // retornamos então esse elemento el
                     // el sendo um elemento aplicamos um querySelector
                     // para pegarmos o elemento que queremos, no caso 
@@ -44,7 +49,7 @@ export class CrawlerPalmeirasController {
                     return el.querySelector('a')?.getAttribute('href');
                 }, node);
 
-                const titulo = await page.evaluate((el: Element) => {
+                const valTitulo = await page.evaluate((el: Element) => {
                     // no elemento node seleciona uma tag 'a' que possui um div com 
                     // a classe .items-central-txt que possui dentro dela uma 
                     // tag h4 com o valor de text do titulo
@@ -52,17 +57,17 @@ export class CrawlerPalmeirasController {
                     return el.querySelector('a .items-central-txt h4')?.textContent; 
                 }, node);
 
-                const data = await page.evaluate((el: Element) => {
-                    return el.querySelector('.items-central-date')?.textContent;
+                const valData = await page.evaluate((el: Element) => {
+                    return el.querySelector('a .items-central-date')?.textContent;
                 }, node);
 
-                console.log(
-                    {
-                        link,
-                        titulo,
-                        data,
-                    }
-                );
+                const link = typeof(valLink) === 'string' ? valLink : 'Erro: Objeto <link> não encontrado';
+                const titulo = typeof(valTitulo) === 'string' ? valTitulo : 'Erro: Objeto <titulo> não encontrado';
+                const data = typeof(valData) === 'string' ? valData : 'Erro: Objeto <data> não encontrado';
+
+                payload.push({ link, titulo, data })
+
+                console.log(payload);
             }
             // finalizando a página.
             await page.close();
