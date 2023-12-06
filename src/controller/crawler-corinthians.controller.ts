@@ -1,4 +1,5 @@
 import { startPuppeteeerSevice } from 'service/start-puppeteer.service';
+import { IFileGenerator } from 'interface/file-generator.interface';
 
 export class CrowlerCorinthiansController {
   constructor() {}
@@ -14,12 +15,7 @@ export class CrowlerCorinthiansController {
 
       const nodes = await page.$$(selector);
 
-      type PayloadItens = string | null | undefined;
-      const payload: Array<{
-        link: PayloadItens;
-        titulo: PayloadItens;
-        data: PayloadItens;
-      }> = [];
+      const payload: Array<IFileGenerator> = [];
 
       for (const node of nodes) {
         const link = await page.evaluate((el: Element) => {
