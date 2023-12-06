@@ -8,7 +8,7 @@ class Init {
 
     private _init() {
         new CrawlerPalmeirasController().init();
-        // new CrowlerCorinthiansController().init();
+        new CrowlerCorinthiansController().init();
         console.log('Inicializado com sucesso');
     }
 }
