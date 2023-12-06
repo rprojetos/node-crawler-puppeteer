@@ -1,0 +1,49 @@
+{
+    "cells": [
+        {
+            "language": "typescript",
+            "source": [
+                "let titulo = \"             Nota – Memorial Corinthians                    <p>\\n                      <strong>Departamento Cultural</strong>\\n                      - 05.12.2023 17:00                    </p>\";"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "titulo = titulo.replace(/\\n/,'');\ntitulo = titulo.replace(/<p>.*?<\\/p>/,'');\ntitulo = titulo.trim();\nconsole.log(titulo);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Nota – Memorial Corinthians",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const data = \"jhgjbju ... 123 ..:34.. <strong>Departamento Cultural</strong> jkhkjk\\n hkjkh                      - 05.122.2023 17:00\";\n\nconst regexArr = data.match(/\\b\\d{2}\\.\\d{2}.\\d{4}\\s\\d{2}:\\d{2}\\b/)\nconst nodeData = regexArr?regexArr[0]:\"err0\"\n\nconsole.log(nodeData);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "err0",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

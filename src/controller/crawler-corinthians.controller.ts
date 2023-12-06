@@ -1,16 +1,15 @@
-import { link } from 'fs';
 import { startPuppeteeerSevice } from 'service/start-puppeteer.service';
 
-export class CrawlerPalmeirasController {
+export class CrowlerCorinthiansController {
   constructor() {}
 
   public async init() {
     try {
       const page = await startPuppeteeerSevice.start(
-        'http://www.palmeiras.com.br/central-de-media/noticias/',
+        'https://www.corinthians.com.br/noticias',
       );
 
-      const selector = '.central-de-midia-container .items-central';
+      const selector = '.ct-news-list .ct-news-list-item';
       await page.waitForSelector(selector);
 
       const nodes = await page.$$(selector);
@@ -24,24 +23,30 @@ export class CrawlerPalmeirasController {
 
       for (const node of nodes) {
         const link = await page.evaluate((el: Element) => {
-          const nodeLink = el.querySelector('a')?.getAttribute('href');
+          const nodeLink = el
+            .querySelector('.ct-news-list-item-content a')
+            ?.getAttribute('href');
           return nodeLink ? nodeLink : 'Erro: Parâmetro <link> não encontrado';
         }, node);
 
         const titulo = await page.evaluate((el: Element) => {
-          const nodeTitulo = el.querySelector(
-            'a .items-central-txt h4',
-          )?.textContent;
+          const nodeTitulo = el
+            .querySelector('.ct-news-list-item-content a h4')
+            ?.innerHTML.replace(/\n/g, '')
+            .replace(/<p>.*?<\/p>/, '')
+            .trim();
           return nodeTitulo
             ? nodeTitulo
-            : 'Erro: Parâmetro <titulo> não encontrado';
+            : 'Erro: Parâmetro <título> não encontrado';
         }, node);
 
         const data = await page.evaluate((el: Element) => {
-          const nodeData = el.querySelector(
-            'a .items-central-date',
-          )?.textContent;
-          return nodeData ? nodeData : 'Erro: Parâmetro <data> não encontrado';
+          const nodeData = el
+            .querySelector('.ct-news-list-item-content a h4 p')
+            ?.innerHTML.match(/\b\d{2}\.\d{2}\.\d{4}\s\d{2}:\d{2}\b/g);
+          return nodeData
+            ? nodeData[0]
+            : 'Erro: Parâmetro <data> não encontrado';
         }, node);
 
         payload.push({ link, titulo, data });

@@ -1,14 +1,31 @@
-<h1>
-  Boilerplate Typescript / NodeJs
-</h1>
-<p>Desenvolvido para prover agilidade no desenvolvimento de código Typescript / NodeJs.</p>
-<p>Os passos de uso são clonar o projeto e instalar as dependências:</p>
+# node-crawler-puppetter
+
+Esse é um projeto, de referencia didática, para desenvolvimento de um crawler.
+
+O crawler desenvolvido aqui, acessa dois sites, para constextualização didática, a saber:
+
+* [Palmeiras](http://www.palmeiras.com.br/central-de-media/noticias/)
+* [Corinthians](https://www.corinthians.com.br/noticias)
+
+Ao acessar os sites, o crawler realiza a leitura das noticias atuais, e armazena essas leituras em um arquivo csv.
+
+# Crawlers
+
+*São robôs automatizados que fazem a pesquisa e extração de grande volume de dados em tempo real.*
+
+*Principal recurso para os motores de busca na internet, esse tipo de automação também pode ser aplicado a estratégias de data analysis em empresas.*
 
 # Puppeteer
 
-Puppeteer é uma biblioteca Node.js que fornece uma API de alto nível para controlar o Chrome/Chromium através do protocolo DevTools. O Puppeteer é executado no modo headless por padrão, mas pode ser configurado para ser executado no Chrome/Chromium completo ("headful").
+Puppeteer é uma biblioteca Node.js que fornece uma API de alto nível para controlar o Chrome/Chromium através do protocolo DevTools.
 
-ref.: https://pptr.dev/
+É executado no modo headless por padrão, mas pode ser configurado para ser executado no Chrome/Chromium completo ("headful").
+
+link: [puppeteer](https://pptr.dev/ "puppeteer")
+
+# Guia comandos
+
+Roteiro dos comandos para instalação de pacotes e comandos utilizados no desenvolvimento:
 
 ```javascript
   // instala o puppeteer mais todas dependicia do boilerplate
@@ -46,6 +63,7 @@ ref.: https://pptr.dev/
 </h2>
 <ul>
   <li>Typescript com NodeJS</li>
+  <li>Puppeteer</li>
   <li>Prettier</li>
   <li>Eslint</li>
   <li>Jest</li>
