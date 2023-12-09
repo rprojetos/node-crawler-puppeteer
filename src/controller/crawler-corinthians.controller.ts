@@ -2,7 +2,7 @@ import { startPuppeteeerSevice } from 'service/start-puppeteer.service';
 import { IFileGenerator } from 'interface/file-generator.interface';
 
 export class CrowlerCorinthiansController {
-  constructor() {}
+  constructor() { }
 
   public async init() {
     try {
@@ -48,6 +48,9 @@ export class CrowlerCorinthiansController {
         payload.push({ link, titulo, data });
       }
       await page.close();
+
+      startPuppeteeerSevice.fileGenerator(payload, '_corinthians');
+
       console.log(payload);
     } catch (error) {
       console.log(error);
