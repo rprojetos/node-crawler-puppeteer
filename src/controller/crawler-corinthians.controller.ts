@@ -44,14 +44,10 @@ export class CrowlerCorinthiansController {
             ? nodeData[0]
             : 'Erro: Parâmetro <data> não encontrado';
         }, node);
-
         payload.push({ link, titulo, data });
       }
       await page.close();
-
       startPuppeteeerSevice.fileGenerator(payload, '_corinthians');
-
-      console.log(payload);
     } catch (error) {
       console.log(error);
     }

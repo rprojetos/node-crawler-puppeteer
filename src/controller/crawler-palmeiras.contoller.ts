@@ -42,7 +42,7 @@ export class CrawlerPalmeirasController {
         payload.push({ link, titulo, data });
       }
       await page.close();
-      console.log(payload);
+        startPuppeteeerSevice.fileGenerator(payload, '_palmeiras');
     } catch (error) {
       console.log(error);
     }
